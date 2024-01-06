@@ -1,5 +1,6 @@
 #include <raylib.h>
 #include "activities.h"
+#include "graphics.h"
 
 void startlogic();
 void startdraw();
@@ -11,6 +12,6 @@ void startlogic() {
 }
 
 void startdraw() {
-    ClearBackground(RAYWHITE);
+    ClearBackground(SYOBONSKYCOLOR);
     DrawText("shobon no akushon!!!!", 190, 200, 20, BLACK);
 }
