@@ -1,10 +1,9 @@
 #ifndef GAME
 #define GAME
 
-typedef struct {
-    void (*logic)(void);
-    void (*graphics)(void);
-} activity;
+#include "activities.h"
+
+extern activity *currentactivity;
 
 void loopgame(void);
 
