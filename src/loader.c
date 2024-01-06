@@ -25,11 +25,16 @@ int loadeverything(int sound) {
     HideCursor();
 
     /* font */
-    sazanamifont = LoadFontEx("./assets/img/sazanami-gothic.ttf", 16);
+    int codepointcount;
+    int *codepoints = LoadCodepoints(CHARACTERS, &codepointcount);
+    sazanamifont = LoadFontEx("./assets/img/sazanami-gothic.ttf", 16, codepoints, codepointcount);
+
     if (!IsFontReady(sazanamifont)) {
         sazanamifont = GetFontDefault();
-        puts("Failed to load Sazanami gothic! Prepare for question mark-apanese!");
+        puts("Failed to load font! Prepare for question mark-apanese!");
     }
+
+    UnloadCodepoints(codepoints);
 
     /* menu */
     currentactivity = &startmenuactivity;
@@ -37,6 +42,7 @@ int loadeverything(int sound) {
 }
 
 void cleanup(int error) {
+    UnloadFont(sazanamifont);
     if (IsWindowReady()) CloseWindow();
     exit(error);
 }
