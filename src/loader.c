@@ -4,13 +4,14 @@
 #include <raylib.h>
 #include "activities.h"
 #include "game.h"
+#include "media.h"
 
 int SOUND = 1;
 
 void checkarguments(int argc, char **argv) {
     if (argc < 2) return;
     if (argc > 2) {
-        printf("Too many arguments\n");
+        puts("Too many arguments");
         return;
     }
 
@@ -22,6 +23,13 @@ int loadeverything(int sound) {
     InitWindow(480, 420, "しょぼんのアクション");
     if (!IsWindowReady()) return -1;
     HideCursor();
+
+    /* font */
+    sazanamifont = LoadFontEx("./assets/img/sazanami-gothic.ttf", 16);
+    if (!IsFontReady(sazanamifont)) {
+        sazanamifont = GetFontDefault();
+        puts("Failed to load Sazanami gothic! Prepare for question mark-apanese!");
+    }
 
     /* menu */
     currentactivity = &startmenuactivity;
