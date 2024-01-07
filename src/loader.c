@@ -4,6 +4,7 @@
 #include <raylib.h>
 #include "activities.h"
 #include "game.h"
+#include "graphics.h"
 #include "media.h"
 
 int SOUND = 1;
@@ -38,7 +39,7 @@ int loadeverything(int sound) {
     UnloadCodepoints(codepoints);
 
     /* textures */
-    playertex = LoadTexture("./assets/img/player.PNG");
+    opentexture(&playertex, "./assets/img/player.PNG");
 
     /* menu */
     currentactivity = &startmenuactivity;
@@ -56,7 +57,8 @@ void cleanup(int error) {
 
     /* graphics */
     UnloadFont(sazanamifont);
-    UnloadTexture(playertex);
+
+    destroytexture(&playertex);
 
     /* final */
     if (IsWindowReady()) CloseWindow();
