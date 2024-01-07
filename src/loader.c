@@ -37,6 +37,9 @@ int loadeverything(int sound) {
 
     UnloadCodepoints(codepoints);
 
+    /* textures */
+    playertex = LoadTexture("./assets/img/player.PNG");
+
     /* menu */
     currentactivity = &startmenuactivity;
     return 0;
@@ -50,7 +53,12 @@ void cleanup(int error) {
     EndDrawing();
 
     /* works */
+
+    /* graphics */
     UnloadFont(sazanamifont);
+    UnloadTexture(playertex);
+
+    /* final */
     if (IsWindowReady()) CloseWindow();
     exit(error);
 }

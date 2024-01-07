@@ -19,6 +19,7 @@ void gamelogic() {
 
 void gamedraw() {
     ClearBackground(SYOBONSKYCOLOR);
+    DrawTexture(playertex, 300, 210, WHITE);
 }
 
 /* start */
