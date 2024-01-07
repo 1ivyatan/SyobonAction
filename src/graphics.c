@@ -3,18 +3,20 @@
 #include <raylib.h>
 #include "graphics.h"
 
-int opentexture(spritetexture *sprite, char *path, int initx1, int inity1, int initx2, int inity2) {
+int opentexture(spritetexture *sprite, char *path, int initx1, int inity1, int initx2, int inity2, int shiftx, int shifty) {
     sprite->texture = LoadTexture(path);
     sprite->x1 = initx1;
     sprite->y1 = inity1;
     sprite->x2 = initx2;
     sprite->y2 = inity2;
+    sprite->shiftx = shiftx;
+    sprite->shifty = shifty;
 
     return (IsTextureReady(sprite->texture));
 }
 
 void printtexture(spritetexture sprite, int x, int y) {
-    DrawTextureRec(sprite.texture, (Rectangle){sprite.x1, sprite.y1, sprite.x2, sprite.y2}, (Vector2){x, y}, WHITE);
+    DrawTextureRec(sprite.texture, (Rectangle){sprite.x1 + sprite.shiftx, sprite.y1 + sprite.shifty, sprite.x2, sprite.y2}, (Vector2){x, y}, WHITE);
 }
 
 void destroytexture(spritetexture *sprite) {

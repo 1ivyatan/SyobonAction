@@ -14,7 +14,7 @@ activity gameactivity = { gamelogic, gamedraw };
 
 /* game */
 void gamelogic() {
-
+    
 }
 
 void gamedraw() {
