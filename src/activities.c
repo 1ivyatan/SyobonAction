@@ -1,15 +1,29 @@
 #include <raylib.h>
 #include "activities.h"
+#include "game.h"
 #include "graphics.h"
 #include "media.h"
 
 void startlogic(void);
 void startdraw(void);
+void gamelogic(void);
+void gamedraw(void);
 
 activity startmenuactivity = { startlogic, startdraw };
+activity gameactivity = { gamelogic, gamedraw };
 
+/* game */
+void gamelogic() {
+
+}
+
+void gamedraw() {
+    ClearBackground(SYOBONSKYCOLOR);
+}
+
+/* start */
 void startlogic() {
-
+    if (IsKeyPressed(KEY_ENTER)) currentactivity = &gameactivity;
 }
 
 void startdraw() {

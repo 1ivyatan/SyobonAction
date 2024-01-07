@@ -8,5 +8,6 @@ typedef struct {
 
 /* ACTIVITIES */
 extern activity startmenuactivity;
+extern activity gameactivity;
 
 #endif
