@@ -3,8 +3,8 @@
 #include "graphics.h"
 #include "media.h"
 
-void startlogic();
-void startdraw();
+void startlogic(void);
+void startdraw(void);
 
 activity startmenuactivity = { startlogic, startdraw };
 

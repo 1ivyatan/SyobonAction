@@ -22,6 +22,7 @@ int loadeverything(int sound) {
     /* window */
     InitWindow(480, 420, "しょぼんのアクション");
     if (!IsWindowReady()) return -1;
+    SetWindowState(FLAG_VSYNC_HINT);
     HideCursor();
 
     /* font */
@@ -42,6 +43,13 @@ int loadeverything(int sound) {
 }
 
 void cleanup(int error) {
+    /* making it clear like the og game*/
+    BeginDrawing();
+    ClearBackground(BLACK);
+    DrawTextEx(sazanamifont, "EXITING...", (Vector2){240, 210}, 16, 1, WHITE);
+    EndDrawing();
+
+    /* works */
     UnloadFont(sazanamifont);
     if (IsWindowReady()) CloseWindow();
     exit(error);

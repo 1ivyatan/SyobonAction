@@ -8,8 +8,12 @@ activity *currentactivity = NULL;
 void loopgame(void) {
 
     while (!WindowShouldClose()) {
+        /* logic */
+        if (currentactivity->logic) currentactivity->logic();
+
+        /* graphics */
         BeginDrawing();
-        currentactivity->graphics();
+        if (currentactivity->graphics) currentactivity->graphics();
         EndDrawing();
     }
 }
