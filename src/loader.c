@@ -39,7 +39,8 @@ int loadeverything(int sound) {
     UnloadCodepoints(codepoints);
 
     /* textures */
-    opentexture(&playertex, "./assets/img/player.PNG");
+    opentexture(&playertex, "./assets/img/player.PNG", 0, 0, 30, 36);
+    //opentexture(&playertex, );
 
     /* menu */
     currentactivity = &startmenuactivity;

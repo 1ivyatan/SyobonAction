@@ -5,4 +5,4 @@
 Font sazanamifont;
 
 /* textures */
-Texture2D playertex;
+spritetexture playertex;

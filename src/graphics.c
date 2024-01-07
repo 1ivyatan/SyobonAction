@@ -3,16 +3,21 @@
 #include <raylib.h>
 #include "graphics.h"
 
-int opentexture(Texture2D *texture, char *path) {
-    *texture = LoadTexture(path);
-    return (IsTextureReady(*texture));
+int opentexture(spritetexture *sprite, char *path, int initx1, int inity1, int initx2, int inity2) {
+    sprite->texture = LoadTexture(path);
+    sprite->x1 = initx1;
+    sprite->y1 = inity1;
+    sprite->x2 = initx2;
+    sprite->y2 = inity2;
+
+    return (IsTextureReady(sprite->texture));
 }
 
-void printtexture(Texture2D texture, int posx, int posy, int x1, int y1, int x2, int y2, Color tint) {
-    DrawTextureRec(texture, (Rectangle){x1, y1, x2, y2}, (Vector2){posx, posy}, tint);
+void printtexture(spritetexture sprite, int x, int y) {
+    DrawTextureRec(sprite.texture, (Rectangle){sprite.x1, sprite.y1, sprite.x2, sprite.y2}, (Vector2){x, y}, WHITE);
 }
 
-void destroytexture(Texture2D *texture) {
-    if (!IsTextureReady(*texture)) return;
-    UnloadTexture(*texture);
+void destroytexture(spritetexture *sprite) {
+    if (!IsTextureReady(sprite->texture)) return;
+    UnloadTexture(sprite->texture);
 }
