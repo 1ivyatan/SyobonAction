@@ -40,6 +40,7 @@ int loadeverything(int sound) {
 
     /* textures */
     opentexture(&playertex, "./assets/img/player.PNG", 0, 0, 30, 36, 0, 0); //////////
+    opentexture(&brocktex, "./assets/img/brock.PNG", 0, 0, 30, 30 ,0, 0); ///////////////////////
 
     /* menu */
     currentactivity = &startmenuactivity;
