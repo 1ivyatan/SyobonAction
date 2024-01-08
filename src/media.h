@@ -8,7 +8,6 @@
 extern Font sazanamifont;
 
 /* textures */
-extern spritetexture playertex;
 extern spritetexture brocktex;
 
 #endif

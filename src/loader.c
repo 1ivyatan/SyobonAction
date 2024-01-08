@@ -5,11 +5,8 @@
 #include "activities.h"
 #include "game.h"
 #include "graphics.h"
-#include "media.h"
-
-////////////////////////////
 #include "levels.h"
-//////////////////////
+#include "media.h"
 
 int SOUND = 1;
 
@@ -43,14 +40,7 @@ int loadeverything(int sound) {
     UnloadCodepoints(codepoints);
 
     /* textures */
-    opentexture(&playertex, "./assets/img/player.PNG", 0, 0, 30, 36, 0, 0); //////////
-    opentexture(&brocktex, "./assets/img/brock.PNG", 0, 0, 30, 30 ,0, 0); ///////////////////////
-
-////////////////////////////
-    playerchar.texture = playertex;
-    playerchar.x = 100;
-    playerchar.y = 300;
-    ////////////////
+    opentexture(&brocktex, "./assets/img/brock.PNG", 0, 0, 30, 30 ,0, 0);
 
     /* menu */
     currentactivity = &startmenuactivity;
@@ -62,14 +52,12 @@ void cleanup(int error) {
     BeginDrawing();
     ClearBackground(BLACK);
     DrawTextEx(sazanamifont, "EXITING...", (Vector2){240, 210}, 16, 1, WHITE);
-    EndDrawing();
 
     /* works */
 
     /* graphics */
+    destroytexture(&brocktex);
     UnloadFont(sazanamifont);
-
-    destroytexture(&playertex);
 
     /* final */
     if (IsWindowReady()) CloseWindow();

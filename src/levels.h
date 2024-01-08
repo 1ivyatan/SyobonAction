@@ -11,10 +11,6 @@ typedef struct {
     int y;
 } entity;
 
-/////////////
-extern entity playerchar;
-///////////
-
 void printlevel(int level[][LEVELHEIGHT], int pos);
 void printentity(entity thing);
 

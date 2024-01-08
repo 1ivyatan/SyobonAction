@@ -2,9 +2,9 @@
 #include "media.h"
 #include "graphics.h"
 
-////////////
-entity playerchar;
-/////////////////////
+void entityphysics(entity thing) {
+
+}
 
 void printentity(entity thing) {
     printtexture(thing.texture, thing.x, thing.y);
