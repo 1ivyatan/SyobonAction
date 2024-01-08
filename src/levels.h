@@ -1,7 +1,7 @@
 #ifndef LEVELS
 #define LEVELS
 
-#define LEVELHEIGHT 16
+#define LEVELHEIGHT 17
 
 void printlevel(int level[][LEVELHEIGHT], int pos);
 
