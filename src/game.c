@@ -5,6 +5,11 @@
 #include "graphics.h"
 #include "media.h"
 
+#include <stdio.h>
+
+/* things specific to this file */
+
+
 /* activities */
 void startlogic(void);
 void startdraw(void);
@@ -12,13 +17,12 @@ void gamelogic(void);
 void gamedraw(void);
 void gamestartup(void);
 
-activity startmenuactivity = { startlogic, startdraw, NULL };
-activity gameactivity = { gamelogic, gamedraw, gamestartup };
+activity startmenuactivity = { startlogic, startdraw};
+activity gameactivity = { gamelogic, gamedraw };
 activity *currentactivity = NULL;
 
 /* functions */
 void loopgame(void) {
-
     while (!WindowShouldClose()) {
         /* logic */
         if (currentactivity->logic) currentactivity->logic();
@@ -31,9 +35,6 @@ void loopgame(void) {
 }
 
 /* ACTIVITY FUNCTIONS */
-void gamestartup() {
-
-}
 
 void gamelogic() {
 
@@ -45,7 +46,9 @@ void gamedraw() {
 }
 
 void startlogic() {
-    if (IsKeyPressed(KEY_ENTER)) currentactivity = &gameactivity;
+    if (IsKeyPressed(KEY_ENTER)) {
+        currentactivity = &gameactivity;
+    }
 }
 
 void startdraw() {
