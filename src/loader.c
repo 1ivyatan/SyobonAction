@@ -7,6 +7,10 @@
 #include "graphics.h"
 #include "media.h"
 
+////////////////////////////
+#include "levels.h"
+//////////////////////
+
 int SOUND = 1;
 
 void checkarguments(int argc, char **argv) {
@@ -41,6 +45,12 @@ int loadeverything(int sound) {
     /* textures */
     opentexture(&playertex, "./assets/img/player.PNG", 0, 0, 30, 36, 0, 0); //////////
     opentexture(&brocktex, "./assets/img/brock.PNG", 0, 0, 30, 30 ,0, 0); ///////////////////////
+
+////////////////////////////
+    playerchar.texture = playertex;
+    playerchar.x = 100;
+    playerchar.y = 300;
+    ////////////////
 
     /* menu */
     currentactivity = &startmenuactivity;

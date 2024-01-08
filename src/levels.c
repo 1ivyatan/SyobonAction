@@ -2,6 +2,14 @@
 #include "media.h"
 #include "graphics.h"
 
+////////////
+entity playerchar;
+/////////////////////
+
+void printentity(entity thing) {
+    printtexture(thing.texture, thing.x, thing.y);
+}
+
 void printlevel(int level[][LEVELHEIGHT], int pos) {
     int cursorx = 0;
     int cursory = 0;

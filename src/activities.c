@@ -42,6 +42,7 @@ void gamelogic() {
 void gamedraw() {
     ClearBackground(SYOBONSKYCOLOR);
     printlevel(testlevel, 10); //////////////
+    printentity(playerchar);
 }
 
 /* start */
