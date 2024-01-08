@@ -4,10 +4,8 @@
 typedef struct {
     void (*logic)(void);
     void (*graphics)(void);
+    void (*startscript)(void);
 } activity;
 
-/* ACTIVITIES */
-extern activity startmenuactivity;
-extern activity gameactivity;
-
+void switchactivity(activity *src, activity *dest, int startscript);
 #endif
