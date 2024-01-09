@@ -9,5 +9,6 @@ extern Font sazanamifont;
 
 /* textures */
 extern spritetexture brocktex;
+extern spritetexture creaturetex;
 
 #endif

@@ -3,12 +3,8 @@
 #include "activities.h"
 #include "game.h"
 #include "graphics.h"
+#include "levels.h"
 #include "media.h"
-
-#include <stdio.h>
-
-/* things specific to this file */
-
 
 /* activities */
 void startlogic(void);
@@ -21,7 +17,19 @@ activity startmenuactivity = { startlogic, startdraw};
 activity gameactivity = { gamelogic, gamedraw };
 activity *currentactivity = NULL;
 
+/* video */
+Camera2D playercamera;
+
+/* tempppppppp */
+entity playerentity;
+
 /* functions */
+/* textures */
+void applytexturetoentity(entity *thing, spritetexture texture) {
+    thing->texture = texture;
+}
+
+/* loop */
 void loopgame(void) {
     while (!WindowShouldClose()) {
         /* logic */
@@ -42,12 +50,18 @@ void gamelogic() {
 
 void gamedraw() {
     ClearBackground(SYOBONSKYCOLOR);
+    BeginMode2D(playercamera);
 
+    EndMode2D();
 }
 
 void startlogic() {
     if (IsKeyPressed(KEY_ENTER)) {
         currentactivity = &gameactivity;
+
+        applytexturetoentity(&playerentity, creaturetex);
+        playerentity.x = 140;
+        playerentity.y = 300;
     }
 }
 

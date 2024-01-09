@@ -41,6 +41,7 @@ int loadeverything(int sound) {
 
     /* textures */
     opentexture(&brocktex, "./assets/img/brock.PNG", 0, 0, 30, 30 ,0, 0);
+    opentexture(&creaturetex, "./assets/img/creatures.png", 0, 0, 20, 34 ,0, 0);
 
     /* menu */
     currentactivity = &startmenuactivity;
@@ -56,6 +57,7 @@ void cleanup(int error) {
     /* works */
 
     /* graphics */
+    destroytexture(&creaturetex);
     destroytexture(&brocktex);
     UnloadFont(sazanamifont);
 

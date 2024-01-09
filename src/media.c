@@ -6,3 +6,4 @@ Font sazanamifont;
 
 /* textures */
 spritetexture brocktex;
+spritetexture creaturetex;
