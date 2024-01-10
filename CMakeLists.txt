@@ -17,4 +17,4 @@ pkg_search_module(RAYLIB REQUIRED raylib)
 include_directories("${RAYLIB_INCLUDE_DIRS}")
 
 add_executable("${PROJECT_NAME}" "${SOURCES}")
-target_link_libraries("${PROJECT_NAME}" "${RAYLIB_LIBRARIES}")
+target_link_libraries("${PROJECT_NAME}" "${RAYLIB_LIBRARIES}" m)
