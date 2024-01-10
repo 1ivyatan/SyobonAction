@@ -78,7 +78,7 @@ void gamelogic() {
     }
 
     playercamera.target = playerentity.position;
-
+    playercamera.offset = (Vector2){ 480/2.0f, 420/2.0f };
     /*
     float delta = GetFrameTime();
 
