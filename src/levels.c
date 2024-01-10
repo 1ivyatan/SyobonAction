@@ -8,7 +8,7 @@ void entityphysics(levelentity thing) {
 }
 
 void printentity(levelentity thing) {
-    printtexture(thing.texture, thing.x, thing.y);
+    printtexture(thing.texture, thing.position.x, thing.position.y);
 }
 
 void printlevel(int level[][LEVELHEIGHT], Camera2D camera) {

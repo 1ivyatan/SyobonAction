@@ -8,8 +8,7 @@
 
 typedef struct {
     spritetexture texture;
-    int x;
-    int y;
+    Vector2 position;
     int controlled;
 } levelentity;
 

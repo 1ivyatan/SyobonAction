@@ -21,6 +21,9 @@ activity *currentactivity = NULL;
 /* video */
 Camera2D playercamera;
 
+/* entities */
+levelentity playerentity;
+
 /* functions */
 /* textures */
 void applytexturetoentity(levelentity *thing, spritetexture texture) {
@@ -58,10 +61,7 @@ void UpdatePlayer(Player *player, float delta)
 /* loop */
 void loopgame(void) {
     while (!WindowShouldClose()) {
-        /* logic */
         if (currentactivity->logic) currentactivity->logic();
-
-        /* graphics */
         BeginDrawing();
         if (currentactivity->graphics) currentactivity->graphics();
         EndDrawing();
@@ -71,6 +71,14 @@ void loopgame(void) {
 /* ACTIVITY FUNCTIONS */
 
 void gamelogic() {
+    /* player control */
+    if (playerentity.controlled) {
+        if (IsKeyDown(KEY_LEFT)) playerentity.position.x -= 1;
+        if (IsKeyDown(KEY_RIGHT)) playerentity.position.x += 1;
+    }
+
+    playercamera.target = playerentity.position;
+
     /*
     float delta = GetFrameTime();
 
@@ -86,13 +94,19 @@ void gamelogic() {
     if (player.position.y < bboxWorldMin.y) camera.target.y = player.position.y;
     if (player.position.x > bboxWorldMax.x) camera.target.x = bboxWorldMin.x + (player.position.x - bboxWorldMax.x);
     if (player.position.y > bboxWorldMax.y) camera.target.y = bboxWorldMin.y + (player.position.y - bboxWorldMax.y);
-
 */
+
 }
 
 void gamedraw() {
     ClearBackground(SYOBONSKYCOLOR);
+
+    BeginMode2D(playercamera);
     printlevel(levelone, playercamera);
+    printentity(playerentity);
+
+    EndMode2D();
+    
     
 /*
             BeginMode2D(camera);
@@ -108,8 +122,16 @@ void gamedraw() {
 
 void startlogic() {
     if (IsKeyPressed(KEY_ENTER)) {
-        currentactivity = &gameactivity;
+        playerentity.position = (Vector2){100, 250};
+        playerentity.controlled = 1;
+        playerentity.texture = creaturetex;
 
+
+        playercamera.target = playerentity.position; 
+        playercamera.zoom = 1;
+        playercamera.offset = (Vector2){ 480/2.0f, 420/2.0f };
+
+        currentactivity = &gameactivity;
         ////////////////////////
         /*
     player.position = (Vector2){ 400, 280 };
