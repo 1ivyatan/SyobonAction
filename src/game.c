@@ -76,8 +76,15 @@ void gamelogic() {
      UpdatePlayer(&player, deltaTime);
      
 
-    camera.offset = (Vector2){ 480/2.0f, 420/2.0f };
-    camera.target = player.position;
+    static Vector2 bbox = { 0.2f, 0.2f };
+
+    Vector2 bboxWorldMin = GetScreenToWorld2D((Vector2){ (1 - bbox.x)*0.5f*480, (1 - bbox.y)*0.5f*420 }, camera);
+    Vector2 bboxWorldMax = GetScreenToWorld2D((Vector2){ (1 + bbox.x)*0.5f*480, (1 + bbox.y)*0.5f*420 }, camera);
+    camera.offset = (Vector2){ (1 - bbox.x)*0.5f * 480, (1 - bbox.y)*0.5f*420 };
+
+    if (player.position.y < bboxWorldMin.y) camera.target.y = player.position.y;
+    if (player.position.x > bboxWorldMax.x) camera.target.x = bboxWorldMin.x + (player.position.x - bboxWorldMax.x);
+    if (player.position.y > bboxWorldMax.y) camera.target.y = bboxWorldMin.y + (player.position.y - bboxWorldMax.y);
 
 
 }
@@ -87,7 +94,7 @@ void gamedraw() {
     
 
             BeginMode2D(camera);
-                DrawTextEx(sazanamifont, "bg!!!!!!!", (Vector2){300, 300}, 64, 1, BLACK);
+                DrawTextEx(sazanamifont, "bg!!!!!!!", (Vector2){0, 0}, 600, 1, BLACK);
                 Rectangle playerRect = { player.position.x - 20, player.position.y - 40, 40, 40 };
                 DrawRectangleRec(playerRect, RED);
 
