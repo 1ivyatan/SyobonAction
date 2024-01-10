@@ -23,11 +23,11 @@ Camera2D playercamera;
 
 /* functions */
 /* textures */
-void applytexturetoentity(entity *thing, spritetexture texture) {
+void applytexturetoentity(levelentity *thing, spritetexture texture) {
     thing->texture = texture;
 }
 
-/* things from raylib example */
+/*
 
 #define PLAYER_JUMP_SPD 350.0f
 #define PLAYER_HOR_SPD 200.0f
@@ -51,7 +51,7 @@ void UpdatePlayer(Player *player, float delta)
         player->canJump = false;
     }
 
-}
+}*/
 
 
 ////////
@@ -71,9 +71,10 @@ void loopgame(void) {
 /* ACTIVITY FUNCTIONS */
 
 void gamelogic() {
-    float deltaTime = GetFrameTime();
+    /*
+    float delta = GetFrameTime();
 
-     UpdatePlayer(&player, deltaTime);
+     UpdatePlayer(&player, delta);
      
 
     static Vector2 bbox = { 0.2f, 0.2f };
@@ -86,20 +87,21 @@ void gamelogic() {
     if (player.position.x > bboxWorldMax.x) camera.target.x = bboxWorldMin.x + (player.position.x - bboxWorldMax.x);
     if (player.position.y > bboxWorldMax.y) camera.target.y = bboxWorldMin.y + (player.position.y - bboxWorldMax.y);
 
-
+*/
 }
 
 void gamedraw() {
     ClearBackground(SYOBONSKYCOLOR);
+    printlevel(levelone, playercamera);
     
-
+/*
             BeginMode2D(camera);
                 DrawTextEx(sazanamifont, "bg!!!!!!!", (Vector2){0, 0}, 600, 1, BLACK);
                 Rectangle playerRect = { player.position.x - 20, player.position.y - 40, 40, 40 };
                 DrawRectangleRec(playerRect, RED);
 
             EndMode2D();
-
+    */
 
 
 }
@@ -109,6 +111,7 @@ void startlogic() {
         currentactivity = &gameactivity;
 
         ////////////////////////
+        /*
     player.position = (Vector2){ 400, 280 };
     player.speed = 0;
     player.canJump = false;
@@ -118,7 +121,7 @@ camera.target = player.position;
     camera.offset = (Vector2){ 480/2.0f, 420/2.0f };
     camera.rotation = 0.0f;
     camera.zoom = 1.0f;
-
+*/
     }
 }
 
