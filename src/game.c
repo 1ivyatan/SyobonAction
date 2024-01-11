@@ -60,6 +60,7 @@ void UpdatePlayer(Player *player, float delta)
 
 
 ////////
+
 /* loop */
 void loopgame(void) {
     while (!WindowShouldClose()) {
@@ -70,22 +71,26 @@ void loopgame(void) {
     }
 }
 
-/* ACTIVITY FUNCTIONS */
-
-void gamelogic() {
-    /* player control */
-    if (playerentity.controlled) {
-        if (IsKeyDown(KEY_LEFT)) playerentity.position.x -= 1;
-        if (IsKeyDown(KEY_RIGHT)) playerentity.position.x += 1;
+/* entity functions */
+void updateplayer(levelentity *player, Camera2D *camera) {
+    /* movement */
+    if (player->controlled) {
+        if (IsKeyDown(KEY_LEFT)) player->position.x -= 1;
+        if (IsKeyDown(KEY_RIGHT)) player->position.x += 1;
     }
 
-    Vector2 worldcoord = GetScreenToWorld2D((Vector2){480 * 0.5f, 420 * 0.5f}, playercamera);
+    /* camera */
+    float boundarytoright = 0.2f; // keep all of these in mind
+    Vector2 worldcoordfprboundary = GetScreenToWorld2D((Vector2){ 480 * 0.5f * (1 - boundarytoright), 420}, *camera);
+    camera->offset = (Vector2){ (1 - boundarytoright) * 0.5f * 480 , 330 };
 
-    printf("%f %f\n", worldcoord.x, worldcoord.y);
+    printf("%f %f\n", worldcoordfprboundary.x, player->position.x);
+    camera->target = player->position;
+}
 
-    playercamera.target = playerentity.position;
-    playercamera.offset = (Vector2){ 0, 330 };
-    /*
+/* ACTIVITY FUNCTIONS */
+void gamelogic() {
+    updateplayer(&playerentity, &playercamera); /*
     float delta = GetFrameTime();
 
      UpdatePlayer(&player, delta);
