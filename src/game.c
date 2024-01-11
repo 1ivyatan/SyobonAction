@@ -84,7 +84,7 @@ void gamelogic() {
     printf("%f %f\n", worldcoord.x, worldcoord.y);
 
     playercamera.target = playerentity.position;
-    playercamera.offset = (Vector2){ 0, 334 };
+    playercamera.offset = (Vector2){ 0, 330 };
     /*
     float delta = GetFrameTime();
 
@@ -110,7 +110,6 @@ void gamedraw() {
     BeginMode2D(playercamera);
     printlevel(levelone, playercamera);
     printentity(playerentity);
-
     EndMode2D();
     
     
@@ -128,7 +127,7 @@ void gamedraw() {
 
 void startlogic() {
     if (IsKeyPressed(KEY_ENTER)) {
-        playerentity.position = (Vector2){0, 420};
+        playerentity.position = (Vector2){0, 416};
         playerentity.controlled = 1;
         playerentity.texture = creaturetex;
 
