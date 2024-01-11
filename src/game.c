@@ -7,6 +7,8 @@
 #include "levels.h"
 #include "media.h"
 
+#include <stdio.h>
+
 /* activities */
 void startlogic(void);
 void startdraw(void);
@@ -77,8 +79,12 @@ void gamelogic() {
         if (IsKeyDown(KEY_RIGHT)) playerentity.position.x += 1;
     }
 
+    Vector2 worldcoord = GetScreenToWorld2D((Vector2){480 * 0.5f, 420 * 0.5f}, playercamera);
+
+    printf("%f %f\n", worldcoord.x, worldcoord.y);
+
     playercamera.target = playerentity.position;
-    playercamera.offset = (Vector2){ 480/2.0f, 420/2.0f };
+    playercamera.offset = (Vector2){ 0, 334 };
     /*
     float delta = GetFrameTime();
 
@@ -122,14 +128,14 @@ void gamedraw() {
 
 void startlogic() {
     if (IsKeyPressed(KEY_ENTER)) {
-        playerentity.position = (Vector2){100, 250};
+        playerentity.position = (Vector2){0, 420};
         playerentity.controlled = 1;
         playerentity.texture = creaturetex;
 
 
         playercamera.target = playerentity.position; 
         playercamera.zoom = 1;
-        playercamera.offset = (Vector2){ 480/2.0f, 420/2.0f };
+        playercamera.offset = (Vector2){ 100, 334 };
 
         currentactivity = &gameactivity;
         ////////////////////////

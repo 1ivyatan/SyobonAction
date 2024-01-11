@@ -40,7 +40,7 @@ int loadeverything(int sound) {
     UnloadCodepoints(codepoints);
 
     /* textures */
-    opentexture(&brocktex, "./assets/img/brock.PNG", 0, 0, 30, 30 ,0, 0);
+    opentexture(&brocktex, "./assets/img/brock.PNG", 0, 0, 30, 30 ,150, 0);
     opentexture(&creaturetex, "./assets/img/creatures.png", 0, 0, 20, 34 ,0, 0);
 
     /* menu */
