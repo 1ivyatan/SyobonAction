@@ -80,12 +80,19 @@ void updateplayer(levelentity *player, Camera2D *camera) {
     }
 
     /* camera */
-    float boundarytoright = 0.2f; // keep all of these in mind
-    Vector2 worldcoordfprboundary = GetScreenToWorld2D((Vector2){ 480 * 0.5f * (1 - boundarytoright), 420}, *camera);
-    camera->offset = (Vector2){ (1 - boundarytoright) * 0.5f * 480 , 330 };
+    float boundary = 0.2f;
+    Vector2 boundarymin = GetScreenToWorld2D((Vector2){ (1 - boundary)*0.5f*480, 420 }, *camera);
+    Vector2 boundarymax = GetScreenToWorld2D((Vector2){ (1 - boundary)*0.5f*480, 420 }, *camera);
+    camera->offset = (Vector2){ (1 - boundary)*0.5f * 480, 330};
+    if (player->position.x > boundarymax.x) camera->target.x = boundarymin.x + (player->position.x - boundarymax.x);
+    
+    //float boundarytoright = 0.2f; // keep all of these in mind
+    //Vector2 worldcoordforboundarymin = GetScreenToWorld2D((Vector2){ (1 - boundarytoright) * 0.5f * 480, 420}, *camera);
+    //Vector2 worldcoordforboundarymax = GetScreenToWorld2D((Vector2){ (1 + boundarytoright) * 0.5f * 480, 420}, *camera);
+    //camera->offset = (Vector2){ (1 - boundarytoright) * 0.5f * 480 , 330 };
+    //printf("%f %f\n", worldcoordforboundarymin.x, player->position.x);
+    //if (player->position.x > worldcoordforboundarymin.x) camera->target.x = worldcoordforboundarymin.x + (player->position.x - worldcoordforboundarymax.x);
 
-    printf("%f %f\n", worldcoordfprboundary.x, player->position.x);
-    camera->target = player->position;
 }
 
 /* ACTIVITY FUNCTIONS */
