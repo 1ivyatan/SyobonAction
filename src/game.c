@@ -80,10 +80,9 @@ void updateplayer(levelentity *player, Camera2D *camera) {
     }
 
     /* camera */
-    float boundary = 0.2f;
-    Vector2 boundarymin = GetScreenToWorld2D((Vector2){ (1 - boundary)*0.5f*480, 420 }, *camera);
-    Vector2 boundarymax = GetScreenToWorld2D((Vector2){ (1 - boundary)*0.5f*480, 420 }, *camera);
-    camera->offset = (Vector2){ (1 - boundary)*0.5f * 480, 330};
+    Vector2 boundarymin = GetScreenToWorld2D((Vector2){ 0.5f*480, 420 }, *camera);
+    Vector2 boundarymax = GetScreenToWorld2D((Vector2){ 0.5f*480, 420 }, *camera);
+    camera->offset = (Vector2){ 0.5f * 480, 330};
     if (player->position.x > boundarymax.x) camera->target.x = boundarymin.x + (player->position.x - boundarymax.x);
     
     //float boundarytoright = 0.2f; // keep all of these in mind
