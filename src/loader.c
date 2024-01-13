@@ -22,7 +22,7 @@ void checkarguments(int argc, char **argv) {
 
 int loadeverything(int sound) {
     /* window */
-    InitWindow(480, 420, "しょぼんのアクション");
+    InitWindow(SCRWIDTH, SCRHEIGHT, "しょぼんのアクション");
     if (!IsWindowReady()) return -1;
     SetWindowState(FLAG_VSYNC_HINT);
     HideCursor();

@@ -27,39 +27,11 @@ Camera2D playercamera;
 levelentity playerentity;
 
 /* functions */
+
 /* textures */
 void applytexturetoentity(levelentity *thing, spritetexture texture) {
     thing->texture = texture;
 }
-
-/*
-
-#define PLAYER_JUMP_SPD 350.0f
-#define PLAYER_HOR_SPD 200.0f
-
-typedef struct Player {
-    Vector2 position;
-    float speed;
-    bool canJump;
-} Player;
-
- Camera2D camera = { 0 };
-         Player player = { 0 };
-
-void UpdatePlayer(Player *player, float delta)
-{
-    if (IsKeyDown(KEY_LEFT)) player->position.x -= PLAYER_HOR_SPD*delta;
-    if (IsKeyDown(KEY_RIGHT)) player->position.x += PLAYER_HOR_SPD*delta;
-    if (IsKeyDown(KEY_SPACE) && player->canJump)
-    {
-        player->speed = -PLAYER_JUMP_SPD;
-        player->canJump = false;
-    }
-
-}*/
-
-
-////////
 
 /* loop */
 void loopgame(void) {
@@ -80,39 +52,16 @@ void updateplayer(levelentity *player, Camera2D *camera) {
     }
 
     /* camera */
-    Vector2 boundarymin = GetScreenToWorld2D((Vector2){ 0.5f*480, 420 }, *camera);
-    Vector2 boundarymax = GetScreenToWorld2D((Vector2){ 0.5f*480, 420 }, *camera);
-    camera->offset = (Vector2){ 0.5f * 480, 330};
+    Vector2 boundarymin = GetScreenToWorld2D((Vector2){ 0.5f * SCRWIDTH, 420 }, *camera);
+    Vector2 boundarymax = GetScreenToWorld2D((Vector2){ 0.5f * SCRWIDTH, SCRHEIGHT }, *camera);
+    camera->offset = (Vector2){ 0.5f * SCRWIDTH, 330 };
     if (player->position.x > boundarymax.x) camera->target.x = boundarymin.x + (player->position.x - boundarymax.x);
-    
-    //float boundarytoright = 0.2f; // keep all of these in mind
-    //Vector2 worldcoordforboundarymin = GetScreenToWorld2D((Vector2){ (1 - boundarytoright) * 0.5f * 480, 420}, *camera);
-    //Vector2 worldcoordforboundarymax = GetScreenToWorld2D((Vector2){ (1 + boundarytoright) * 0.5f * 480, 420}, *camera);
-    //camera->offset = (Vector2){ (1 - boundarytoright) * 0.5f * 480 , 330 };
-    //printf("%f %f\n", worldcoordforboundarymin.x, player->position.x);
-    //if (player->position.x > worldcoordforboundarymin.x) camera->target.x = worldcoordforboundarymin.x + (player->position.x - worldcoordforboundarymax.x);
 
 }
 
 /* ACTIVITY FUNCTIONS */
 void gamelogic() {
-    updateplayer(&playerentity, &playercamera); /*
-    float delta = GetFrameTime();
-
-     UpdatePlayer(&player, delta);
-     
-
-    static Vector2 bbox = { 0.2f, 0.2f };
-
-    Vector2 bboxWorldMin = GetScreenToWorld2D((Vector2){ (1 - bbox.x)*0.5f*480, (1 - bbox.y)*0.5f*420 }, camera);
-    Vector2 bboxWorldMax = GetScreenToWorld2D((Vector2){ (1 + bbox.x)*0.5f*480, (1 + bbox.y)*0.5f*420 }, camera);
-    camera.offset = (Vector2){ (1 - bbox.x)*0.5f * 480, (1 - bbox.y)*0.5f*420 };
-
-    if (player.position.y < bboxWorldMin.y) camera.target.y = player.position.y;
-    if (player.position.x > bboxWorldMax.x) camera.target.x = bboxWorldMin.x + (player.position.x - bboxWorldMax.x);
-    if (player.position.y > bboxWorldMax.y) camera.target.y = bboxWorldMin.y + (player.position.y - bboxWorldMax.y);
-*/
-
+    updateplayer(&playerentity, &playercamera);
 }
 
 void gamedraw() {
@@ -122,18 +71,6 @@ void gamedraw() {
     printlevel(levelone, playercamera);
     printentity(playerentity);
     EndMode2D();
-    
-    
-/*
-            BeginMode2D(camera);
-                DrawTextEx(sazanamifont, "bg!!!!!!!", (Vector2){0, 0}, 600, 1, BLACK);
-                Rectangle playerRect = { player.position.x - 20, player.position.y - 40, 40, 40 };
-                DrawRectangleRec(playerRect, RED);
-
-            EndMode2D();
-    */
-
-
 }
 
 void startlogic() {
@@ -148,18 +85,6 @@ void startlogic() {
         playercamera.offset = (Vector2){ 100, 334 };
 
         currentactivity = &gameactivity;
-        ////////////////////////
-        /*
-    player.position = (Vector2){ 400, 280 };
-    player.speed = 0;
-    player.canJump = false;
-
-
-camera.target = player.position;
-    camera.offset = (Vector2){ 480/2.0f, 420/2.0f };
-    camera.rotation = 0.0f;
-    camera.zoom = 1.0f;
-*/
     }
 }
 
