@@ -44,31 +44,31 @@ void loopgame(void) {
 }
 
 /* entity functions */
-void updateplayer(levelentity *player, Camera2D *camera) {
+void updateplayer(levelentity *player, Camera2D *camera, float delta) {
     /* movement */
     if (player->controlled) {
-        if (IsKeyDown(KEY_LEFT)) player->position.x -= 1;
-        if (IsKeyDown(KEY_RIGHT)) player->position.x += 1;
+        if (IsKeyDown(KEY_LEFT)) player->position.x -= WALKINGSPEED;
+        if (IsKeyDown(KEY_RIGHT)) player->position.x += WALKINGSPEED;
     }
 
     /* camera */
-    Vector2 boundarymin = GetScreenToWorld2D((Vector2){ 0.5f * SCRWIDTH, 420 }, *camera);
-    Vector2 boundarymax = GetScreenToWorld2D((Vector2){ 0.5f * SCRWIDTH, SCRHEIGHT }, *camera);
+    Vector2 boundary = GetScreenToWorld2D((Vector2){ 0.5f * SCRWIDTH, SCRHEIGHT }, *camera);
     camera->offset = (Vector2){ 0.5f * SCRWIDTH, 330 };
-    if (player->position.x > boundarymax.x) camera->target.x = boundarymin.x + (player->position.x - boundarymax.x);
-
+    if (player->position.x > boundary.x) camera->target.x = boundary.x + (player->position.x - boundary.x);
+    printf("%f %f\n", player->position.x, boundary.x);
 }
 
 /* ACTIVITY FUNCTIONS */
 void gamelogic() {
-    updateplayer(&playerentity, &playercamera);
+    float delta = GetFrameTime();
+    updateplayer(&playerentity, &playercamera, delta);
 }
 
 void gamedraw() {
     ClearBackground(SYOBONSKYCOLOR);
 
     BeginMode2D(playercamera);
-    printlevel(levelone, playercamera);
+    printlevel(levelone, playercamera); /////////
     printentity(playerentity);
     EndMode2D();
 }
@@ -80,9 +80,9 @@ void startlogic() {
         playerentity.texture = creaturetex;
 
 
-        playercamera.target = playerentity.position; 
+        playercamera.target = playerentity.position; /////////////
         playercamera.zoom = 1;
-        playercamera.offset = (Vector2){ 100, 334 };
+        playercamera.offset = (Vector2){ 100, 330 };
 
         currentactivity = &gameactivity;
     }

@@ -5,6 +5,7 @@
 #include "graphics.h"
 
 #define LEVELHEIGHT 17
+#define WALKINGSPEED 3.f
 
 typedef struct {
     spritetexture texture;
