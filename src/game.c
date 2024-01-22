@@ -7,8 +7,6 @@
 #include "levels.h"
 #include "media.h"
 
-#include <stdio.h>
-
 /* activities */
 void startlogic(void);
 void startdraw(void);
@@ -20,14 +18,16 @@ activity startmenuactivity = { startlogic, startdraw};
 activity gameactivity = { gamelogic, gamedraw };
 activity *currentactivity = NULL;
 
+/* global variables only on this file */
 /* video */
 Camera2D playercamera;
 
 /* entities */
 levelentity playerentity;
 
-/* functions */
+/* flags */
 
+/* functions, end of variables */
 /* textures */
 void applytexturetoentity(levelentity *thing, spritetexture texture) {
     thing->texture = texture;
@@ -52,16 +52,25 @@ void updateplayer(levelentity *player, Camera2D *camera, float delta) {
     }
 
     /* camera */
-    Vector2 boundary = GetScreenToWorld2D((Vector2){ 0.5f * SCRWIDTH, SCRHEIGHT }, *camera);
-    camera->offset = (Vector2){ 0.5f * SCRWIDTH, 330 };
-    if (player->position.x > boundary.x) camera->target.x = boundary.x + (player->position.x - boundary.x);
-    printf("%f %f\n", player->position.x, boundary.x);
+    Vector2 boundary = GetScreenToWorld2D((Vector2){ 0.5f * SCRWIDTH, SCRHEIGHT }, *camera); /* center */
+    //Vector2 boundaryend = GetScreenToWorld2D((Vector2){ SCRWIDTH, SCRHEIGHT }, *camera); /* center */
+    //printf("%f\n", boundaryend.x);
+    if (player->position.x > boundary.x) {
+        camera->offset = (Vector2){ 0.5f * SCRWIDTH, 330 };
+        camera->target.x = boundary.x + (player->position.x - boundary.x);
+    }
 }
 
 /* ACTIVITY FUNCTIONS */
 void gamelogic() {
     float delta = GetFrameTime();
     updateplayer(&playerentity, &playercamera, delta);
+
+        
+    //float h1 = boundary.x - (SCRWIDTH * 0.5f);
+    //float h2 = boundary.x + (SCRWIDTH * 0.5f);
+    //printf("%f %f %f %f %f\n", player->position.x, boundary.x, h1, h2, h2 - h1);
+    //int h1 = ((int)player->position.x % TILESIZE) * -1;
 }
 
 void gamedraw() {
@@ -75,15 +84,17 @@ void gamedraw() {
 
 void startlogic() {
     if (IsKeyPressed(KEY_ENTER)) {
+
+        /* player */
         playerentity.position = (Vector2){0, 416};
         playerentity.controlled = 1;
         playerentity.texture = creaturetex;
 
-
         playercamera.target = playerentity.position; /////////////
         playercamera.zoom = 1;
-        playercamera.offset = (Vector2){ 100, 330 };
+        playercamera.offset = (Vector2){ 0, 330 };
 
+        /* level */
         currentactivity = &gameactivity;
     }
 }

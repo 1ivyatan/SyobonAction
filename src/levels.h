@@ -4,13 +4,16 @@
 #include <raylib.h>
 #include "graphics.h"
 
+#define LEVELWIDTH 16
 #define LEVELHEIGHT 17
+#define TILESIZE 30
 #define WALKINGSPEED 3.f
 
 typedef struct {
     spritetexture texture;
     Vector2 position;
     int controlled;
+    Rectangle hitbox;
 } levelentity;
 
 typedef struct {
