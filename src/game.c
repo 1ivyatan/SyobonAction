@@ -77,7 +77,7 @@ void gamedraw() {
     ClearBackground(SYOBONSKYCOLOR);
 
     BeginMode2D(playercamera);
-    printlevel(levelone, playercamera); /////////
+    printlevel(levelone, playercamera, playerentity.position.x); /////////
     printentity(playerentity);
     EndMode2D();
 }
@@ -90,6 +90,7 @@ void startlogic() {
         playerentity.controlled = 1;
         playerentity.texture = creaturetex;
 
+        /////////////////////////
         playercamera.target = playerentity.position; /////////////
         playercamera.zoom = 1;
         playercamera.offset = (Vector2){ 0, 330 };

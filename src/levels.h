@@ -21,7 +21,7 @@ typedef struct {
 } levelblock;
 
 void applytexturetoentity(levelentity *thing, spritetexture texture);
-void printlevel(int level[][LEVELHEIGHT], Camera2D camera);
+void printlevel(int level[][LEVELHEIGHT], Camera2D camera, float pos);
 void printentity(levelentity thing);
 
 #endif
