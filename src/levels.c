@@ -11,7 +11,8 @@ levelviewer prepareviewer(int level[][LEVELHEIGHT], levelentity *entity2follow) 
 
     
     viewer.entity2follow = &entity2follow->position;
-    //viewer.level = level;
+    viewer.level = level;
+    
     //viewer.camera.target = viewer.entity2follow;
 
     return viewer;
