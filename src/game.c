@@ -7,6 +7,8 @@
 #include "levels.h"
 #include "media.h"
 
+#include <stdio.h>
+
 /* activities */
 void startlogic(void);
 void startdraw(void);
@@ -20,6 +22,8 @@ activity *currentactivity = NULL;
 
 /* global variables only on this file */
 /* video */
+levelviewer syobonviewer;
+
 Camera2D playercamera;
 
 /* entities */
@@ -76,10 +80,14 @@ void gamelogic() {
 void gamedraw() {
     ClearBackground(SYOBONSKYCOLOR);
 
+    /* level */
     BeginMode2D(playercamera);
-    printlevel(levelone, playercamera, playerentity.position.x); /////////
-    printentity(playerentity);
+        printlevel(levelone, playercamera, playerentity.position.x); /////////
+        printentity(playerentity);
     EndMode2D();
+
+    /* something for UI
+    ...... */
 }
 
 void startlogic() {
@@ -96,7 +104,11 @@ void startlogic() {
         playercamera.offset = (Vector2){ 0, 330 };
 
         /* level */
+        syobonviewer = prepareviewer(levelone, &playerentity);
+
         currentactivity = &gameactivity;
+        //levellength = sizeof(levelone) / sizeof(levelone[0]);
+     //   printf("%d\n", levellength);
     }
 }
 

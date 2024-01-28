@@ -20,6 +20,14 @@ typedef struct {
     int texture;
 } levelblock;
 
+typedef struct {
+    Camera2D camera;
+    Vector2 *entity2follow;
+    int *level[][LEVELHEIGHT];
+} levelviewer;
+
+levelviewer prepareviewer(int level[][LEVELHEIGHT], levelentity *entity2follow);
+
 void applytexturetoentity(levelentity *thing, spritetexture texture);
 void printlevel(int level[][LEVELHEIGHT], Camera2D camera, float pos);
 void printentity(levelentity thing);
