@@ -13,6 +13,7 @@ levelviewer prepareviewer(int (*level)[LEVELHEIGHT], levelentity *entity2follow)
     viewer.entity2follow = &entity2follow->position;
     viewer.camera.target = *viewer.entity2follow;
     viewer.camera.zoom = 1;
+    viewer.camera.rotation = 0;
     viewer.camera.offset = (Vector2){ 0, 330 };
 
     viewer.level = level;
@@ -21,6 +22,10 @@ levelviewer prepareviewer(int (*level)[LEVELHEIGHT], levelentity *entity2follow)
 
 void updateviewer(levelviewer* viewer) {
     Vector2 boundary = GetScreenToWorld2D((Vector2){ 0.5f * SCRWIDTH, SCRHEIGHT }, viewer->camera); /* center */
+    if (viewer->entity2follow->x > boundary.x) {
+        viewer->camera.offset = (Vector2){ 0.5f * SCRWIDTH, 330 };
+        viewer->camera.target.x = boundary.x + (viewer->entity2follow->x - boundary.x);
+    }
 }
 
 

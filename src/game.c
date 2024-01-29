@@ -24,8 +24,6 @@ activity *currentactivity = NULL;
 /* video */
 levelviewer syobonviewer;
 
-//Camera2D playercamera;
-
 /* entities */
 levelentity playerentity;
 
@@ -54,13 +52,6 @@ void updateplayer(levelentity *player, float delta) {
         if (IsKeyDown(KEY_LEFT)) player->position.x -= WALKINGSPEED;
         if (IsKeyDown(KEY_RIGHT)) player->position.x += WALKINGSPEED;
     }
-
-    /* camera */
-    //if (player->position.x > boundary.x) {
-     //   camera->offset = (Vector2){ 0.5f * SCRWIDTH, 330 };
-    //    camera->target.x = boundary.x + (player->position.x - boundary.x);
-   // }
-    
 }
 
 /* ACTIVITY FUNCTIONS */
@@ -68,19 +59,12 @@ void gamelogic() {
     float delta = GetFrameTime();
     updateplayer(&playerentity, delta);
     updateviewer(&syobonviewer);
-        
-    //float h1 = boundary.x - (SCRWIDTH * 0.5f);
-    //float h2 = boundary.x + (SCRWIDTH * 0.5f);
-    //printf("%f %f %f %f %f\n", player->position.x, boundary.x, h1, h2, h2 - h1);
-    //int h1 = ((int)player->position.x % TILESIZE) * -1;
 }
 
 void gamedraw() {
     ClearBackground(SYOBONSKYCOLOR);
 
-    /* level */
     BeginMode2D(syobonviewer.camera);
-        //printlevel(levelone, playercamera, playerentity.position.x); /////////
         printentity(playerentity);
     EndMode2D();
 
@@ -98,10 +82,7 @@ void startlogic() {
 
         /* level */
         syobonviewer = prepareviewer(levelone, &playerentity);
-
         currentactivity = &gameactivity;
-        //levellength = sizeof(levelone) / sizeof(levelone[0]);
-     //   printf("%d\n", levellength);
     }
 }
 
