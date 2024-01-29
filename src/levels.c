@@ -6,16 +6,21 @@
 #include <stdio.h>
 
 
-levelviewer prepareviewer(int level[][LEVELHEIGHT], levelentity *entity2follow) {
+levelviewer prepareviewer(int (*level)[LEVELHEIGHT], levelentity *entity2follow) {
     levelviewer viewer;
 
-    
+    /* target */
     viewer.entity2follow = &entity2follow->position;
-    viewer.level = level;
-    
-    //viewer.camera.target = viewer.entity2follow;
+    viewer.camera.target = *viewer.entity2follow;
+    viewer.camera.zoom = 1;
+    viewer.camera.offset = (Vector2){ 0, 330 };
 
+    viewer.level = level;
     return viewer;
+}
+
+void updateviewer(levelviewer* viewer) {
+    Vector2 boundary = GetScreenToWorld2D((Vector2){ 0.5f * SCRWIDTH, SCRHEIGHT }, viewer->camera); /* center */
 }
 
 

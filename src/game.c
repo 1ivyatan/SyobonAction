@@ -24,7 +24,7 @@ activity *currentactivity = NULL;
 /* video */
 levelviewer syobonviewer;
 
-Camera2D playercamera;
+//Camera2D playercamera;
 
 /* entities */
 levelentity playerentity;
@@ -48,7 +48,7 @@ void loopgame(void) {
 }
 
 /* entity functions */
-void updateplayer(levelentity *player, Camera2D *camera, float delta) {
+void updateplayer(levelentity *player, float delta) {
     /* movement */
     if (player->controlled) {
         if (IsKeyDown(KEY_LEFT)) player->position.x -= WALKINGSPEED;
@@ -56,20 +56,18 @@ void updateplayer(levelentity *player, Camera2D *camera, float delta) {
     }
 
     /* camera */
-    Vector2 boundary = GetScreenToWorld2D((Vector2){ 0.5f * SCRWIDTH, SCRHEIGHT }, *camera); /* center */
-    //Vector2 boundaryend = GetScreenToWorld2D((Vector2){ SCRWIDTH, SCRHEIGHT }, *camera); /* center */
-    //printf("%f\n", boundaryend.x);
-    if (player->position.x > boundary.x) {
-        camera->offset = (Vector2){ 0.5f * SCRWIDTH, 330 };
-        camera->target.x = boundary.x + (player->position.x - boundary.x);
-    }
+    //if (player->position.x > boundary.x) {
+     //   camera->offset = (Vector2){ 0.5f * SCRWIDTH, 330 };
+    //    camera->target.x = boundary.x + (player->position.x - boundary.x);
+   // }
+    
 }
 
 /* ACTIVITY FUNCTIONS */
 void gamelogic() {
     float delta = GetFrameTime();
-    updateplayer(&playerentity, &playercamera, delta);
-
+    updateplayer(&playerentity, delta);
+    updateviewer(&syobonviewer);
         
     //float h1 = boundary.x - (SCRWIDTH * 0.5f);
     //float h2 = boundary.x + (SCRWIDTH * 0.5f);
@@ -81,8 +79,8 @@ void gamedraw() {
     ClearBackground(SYOBONSKYCOLOR);
 
     /* level */
-    BeginMode2D(playercamera);
-        printlevel(levelone, playercamera, playerentity.position.x); /////////
+    BeginMode2D(syobonviewer.camera);
+        //printlevel(levelone, playercamera, playerentity.position.x); /////////
         printentity(playerentity);
     EndMode2D();
 
@@ -97,11 +95,6 @@ void startlogic() {
         playerentity.position = (Vector2){0, 416};
         playerentity.controlled = 1;
         playerentity.texture = creaturetex;
-
-        /////////////////////////
-        playercamera.target = playerentity.position; /////////////
-        playercamera.zoom = 1;
-        playercamera.offset = (Vector2){ 0, 330 };
 
         /* level */
         syobonviewer = prepareviewer(levelone, &playerentity);
