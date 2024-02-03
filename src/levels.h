@@ -21,6 +21,7 @@ typedef struct {
 } levelblock;
 
 typedef struct {
+    int LEVELEOF;
     int (*levelgrid)[LEVELHEIGHT];
 } levelfile;
 
@@ -34,8 +35,5 @@ levelviewer prepareviewer(levelfile *level, levelentity *entity2follow);
 void updateviewer(levelviewer* viewer);
 void printviewer(levelviewer* viewer);
 
-void applytexturetoentity(levelentity *thing, spritetexture texture);
-void printlevel(int level[][LEVELHEIGHT], Camera2D camera, float pos);
 void printentity(levelentity thing);
-
 #endif

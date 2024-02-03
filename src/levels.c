@@ -17,12 +17,13 @@ levelviewer prepareviewer(levelfile *level, levelentity *entity2follow) {
     viewer.camera.offset = (Vector2){ 0, 330 };
 
     viewer.level = level;
+
     return viewer;
 }
 
 void updateviewer(levelviewer* viewer) {
     Vector2 boundary = GetScreenToWorld2D((Vector2){ 0.5f * SCRWIDTH, SCRHEIGHT }, viewer->camera); /* center */
-    if (viewer->entity2follow->x > boundary.x) {
+    if (viewer->entity2follow->x > boundary.x && !viewer->level->LEVELEOF) {
         viewer->camera.offset = (Vector2){ 0.5f * SCRWIDTH, 330 };
         viewer->camera.target.x = boundary.x + (viewer->entity2follow->x - boundary.x);
     }
@@ -35,17 +36,22 @@ void printviewer(levelviewer* viewer) {
     int cursorx = boundx1 * TILESIZE,
         cursory = 0,
         boundx2 = boundx1 + LEVELWIDTH + 1;
+        
     for (int i = boundx1; i < boundx2; i++) {
-        if (viewer->level->levelgrid[i][0] < 0) break;
-        for (int j = 0; j < LEVELHEIGHT; j++) {
-            if (viewer->level->levelgrid[i][j] > 0) printtexture(brocktex, cursorx, cursory);
-            cursory += TILESIZE;
-        }
-        cursorx += TILESIZE;
-        cursory = 0;
+        if (viewer->level->levelgrid[i][0] > -1) {
+            for (int j = 0; j < LEVELHEIGHT; j++) {
+                if (viewer->level->levelgrid[i][j] > 0) printtexture(brocktex, cursorx, cursory); ///////////
+                cursory += TILESIZE;
+            }
+            cursorx += TILESIZE;
+            cursory = 0;
+        } else if (!viewer->level->LEVELEOF) {
+            viewer->level->LEVELEOF = 1;
+            break;
+        } else break;
     }
 }
 
-void printentity(levelentity thing) {
+void printentity(levelentity thing) { ///////////////
     printtexture(thing.texture, thing.position.x, thing.position.y);
 }

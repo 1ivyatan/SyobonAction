@@ -34,4 +34,4 @@ int stageonedata[][LEVELHEIGHT] = {
 };
 
 /* levels */
-levelfile StageONE = {stageonedata};
+levelfile StageONE = {0, stageonedata};
