@@ -17,6 +17,6 @@ extern spritetexture brocktex;
 extern spritetexture creaturetex;
 
 /* levels */
-extern int levelone[][LEVELHEIGHT];
+extern levelfile StageONE;
 
 #endif

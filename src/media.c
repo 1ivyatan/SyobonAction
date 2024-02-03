@@ -8,8 +8,8 @@ Font sazanamifont;
 spritetexture brocktex;
 spritetexture creaturetex;
 
-/* levels */
-int levelone[][LEVELHEIGHT] = {
+/* level data */
+int stageonedata[][LEVELHEIGHT] = {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,1,1},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,1,1},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,1,1},
@@ -32,3 +32,6 @@ int levelone[][LEVELHEIGHT] = {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,1,1},
     {-1,-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}
 };
+
+/* levels */
+levelfile StageONE = {stageonedata};

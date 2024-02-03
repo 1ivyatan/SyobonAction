@@ -81,7 +81,7 @@ void startlogic() {
         playerentity.texture = creaturetex;
 
         /* level */
-        syobonviewer = prepareviewer(levelone, &playerentity);
+        syobonviewer = prepareviewer(&StageONE, &playerentity);
         currentactivity = &gameactivity;
     }
 }

@@ -6,7 +6,7 @@
 #include <stdio.h>
 
 
-levelviewer prepareviewer(int (*level)[LEVELHEIGHT], levelentity *entity2follow) {
+levelviewer prepareviewer(levelfile *level, levelentity *entity2follow) {
     levelviewer viewer;
 
     /* target */
@@ -26,6 +26,10 @@ void updateviewer(levelviewer* viewer) {
         viewer->camera.offset = (Vector2){ 0.5f * SCRWIDTH, 330 };
         viewer->camera.target.x = boundary.x + (viewer->entity2follow->x - boundary.x);
     }
+}
+
+void printviewer() {
+    
 }
 
 
