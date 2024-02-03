@@ -65,6 +65,7 @@ void gamedraw() {
     ClearBackground(SYOBONSKYCOLOR);
 
     BeginMode2D(syobonviewer.camera);
+        printviewer(&syobonviewer);
         printentity(playerentity);
     EndMode2D();
 
